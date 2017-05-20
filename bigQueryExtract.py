@@ -8,6 +8,7 @@ app = Flask(__name__)
 api = Api(app)
 
 messages = []
+message = {'name':'','state':'','age':'','id':'','gender':''}
 
 
 @app.after_request
@@ -32,7 +33,12 @@ class Message(Resource):
 
         for row in query.rows:
             print(row)
-            messages.append(row)
+            message['name'] = row[0]
+            message['state'] = row[1]
+            message['age'] = row[2]
+            message['id'] = row[3]
+            message['gender'] = row[4]
+            messages.append(message)
 
         print len(messages)
         return messages
